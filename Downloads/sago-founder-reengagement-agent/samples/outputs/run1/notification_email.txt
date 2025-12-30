@@ -1,0 +1,10 @@
+Deal: Northwind AI
+Thread: thread_abc123
+Decision: RE-ENGAGE
+Score: 0.94 (threshold 0.75)
+
+Top signals:
+- [product_launch] Northwind AI announced GA of their workflow agent (score 0.65)
+- [hiring] Northwind AI posted 3 enterprise AE roles (score 0.51)
+- [funding] Rumor: Northwind AI raising a seed extension (score 0.45)
+- [press] Tech outlet mentions Northwind AI customer wins (score 0.35)

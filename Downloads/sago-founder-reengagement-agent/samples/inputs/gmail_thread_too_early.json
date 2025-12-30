@@ -1,0 +1,28 @@
+{
+  "thread_id": "thread_abc123",
+  "founder_name": "Avery",
+  "company": "Northwind AI",
+  "meeting_context": "At our October meeting you mentioned you were piloting with 2 design partners and targeting an enterprise rollout in Q1.",
+  "messages": [
+    {
+      "msg_id": "m1",
+      "timestamp": "2025-10-12T17:10:00-07:00",
+      "from_email": "avery@northwind.ai",
+      "to_emails": [
+        "investor@example.com"
+      ],
+      "subject": "Northwind AI - quick intro",
+      "body_text": "Great meeting you. Attaching a short overview. Would love to keep you posted."
+    },
+    {
+      "msg_id": "m2",
+      "timestamp": "2025-10-13T09:05:00-07:00",
+      "from_email": "investor@example.com",
+      "to_emails": [
+        "avery@northwind.ai"
+      ],
+      "subject": "Re: Northwind AI - quick intro",
+      "body_text": "Thanks Avery. Really interesting, but I think this is too early for us. Please keep me posted and let's revisit once you have a few more deployments."
+    }
+  ]
+}
