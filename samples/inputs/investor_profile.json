@@ -1,0 +1,15 @@
+{
+  "investor_id": "inv_001",
+  "name": "Jordan Lee",
+  "email": "investor@example.com",
+  "firm": "Example Ventures",
+  "timezone": "America/Los_Angeles",
+  "auto_send": false,
+  "signal_threshold": 0.75,
+  "signal_weights": {
+    "funding": 1.25,
+    "hiring": 1.05,
+    "product_launch": 1.15,
+    "press": 0.9
+  }
+}
