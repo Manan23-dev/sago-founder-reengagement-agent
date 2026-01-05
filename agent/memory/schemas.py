@@ -1,9 +1,10 @@
 from datetime import datetime
-from typing import Literal, Optional, List
-from pydantic import BaseModel, Field
+from typing import Literal, Optional, List, Dict
+from pydantic import BaseModel, Field, field_validator
 
 
 class GmailMessage(BaseModel):
+    """Represents a single Gmail message."""
     msg_id: str
     timestamp: datetime
     from_email: str
@@ -13,17 +14,37 @@ class GmailMessage(BaseModel):
 
 
 class GmailThread(BaseModel):
+    """Represents a Gmail conversation thread."""
     thread_id: str
     messages: List[GmailMessage]
 
 
 class InvestorProfile(BaseModel):
+    """Investor configuration and preferences."""
     investor_id: str
     name: str
     email: str
     firm: Optional[str] = None
     timezone: str = "America/Los_Angeles"
     auto_send: bool = False
+    signal_threshold: float = 0.75
+    signal_weights: Dict[str, float] = Field(default_factory=dict)
+    
+    @field_validator('signal_threshold')
+    @classmethod
+    def validate_threshold(cls, v: float) -> float:
+        """Validate threshold is between 0.0 and 1.0."""
+        if not 0.0 <= v <= 1.0:
+            raise ValueError('signal_threshold must be between 0.0 and 1.0')
+        return v
+    
+    @field_validator('signal_weights')
+    @classmethod
+    def validate_weights(cls, v: Dict[str, float]) -> Dict[str, float]:
+        """Validate all weights are between 0.0 and 2.0."""
+        if v and not all(0.0 <= w <= 2.0 for w in v.values()):
+            raise ValueError('signal_weights must be between 0.0 and 2.0')
+        return v
 
 
 class FounderProfile(BaseModel):
@@ -47,6 +68,7 @@ class DealState(BaseModel):
 
 
 class SignalEvent(BaseModel):
+    """Represents an external signal about a company."""
     source: str
     occurred_at: datetime
     title: str
@@ -54,6 +76,14 @@ class SignalEvent(BaseModel):
     url: Optional[str] = None
     confidence: float = 0.5
     magnitude: float = 0.5
+    
+    @field_validator('confidence', 'magnitude')
+    @classmethod
+    def validate_score_range(cls, v: float) -> float:
+        """Validate confidence and magnitude are between 0.0 and 1.0."""
+        if not 0.0 <= v <= 1.0:
+            raise ValueError('confidence and magnitude must be between 0.0 and 1.0')
+        return v
 
 
 class SignalScore(BaseModel):
